@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "directories": {
-    "test": "test",
-    "coverage": "istanbul cover _mocha"
-  },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
@@ -17,8 +14,7 @@
   "devDependencies": {
     "expect.js": "^0.3.1",
     "istanbul": "^0.3.18",
-    "mocha": "^2.2.5",
-    "sinon": "^1.16.1"
+    "mocha": "^2.2.5"
   },
   "author": "Henning Gerrits",
   "license": "ISC",

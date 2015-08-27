@@ -8,12 +8,9 @@
 var Q = require('q');
 var util = require('util');
 var isObjectEmpty = require('is-object-empty');
+var helper = require('./lib/helper');
 
 var api = Object.create(null);
-
-function splitKey(key){
-    return key.split('.');
-}
 
 /**
  * Add key to the translation object. Non-existing objects will be created.
@@ -28,7 +25,7 @@ api.addKey = function(key, value, translationObject){
         return Q.reject(new TypeError('translationObject is not an object'));
     }
 
-    var splitted = splitKey(key);
+    var splitted = helper.splitKey(key);
     var obj = translationObject;
     var length = splitted.length;
     var prop;
@@ -64,48 +61,7 @@ api.addKey = function(key, value, translationObject){
     return Q(translationObject);
 };
 
-/**
- *
- * @param {string} key
- * @param {object} translationObject
- * @returns {promise}
- */
-function search(key, translationObject){
-    var splitted = splitKey(key);
-    var obj = translationObject;
-    var length = splitted.length;
-    var prop;
-    var history = [translationObject];
 
-    for(var i = 0; i < length -1; i++){
-        prop = obj[splitted[i]];
-
-        if(util.isNullOrUndefined(prop)){
-            return Q();
-        } else if(util.isString(prop)){
-            return Q();
-        } else if(util.isObject(prop)){
-            /* ignore */
-        } else {
-            return Q.reject(new TypeError('unexpected type'));
-        }
-
-        obj = prop;
-        history.push(prop);
-    }
-
-    prop = obj[splitted[length-1]];
-
-    if(util.isNullOrUndefined(prop)){
-        return Q();
-    } else if(util.isString(prop)){
-        return Q({translation: obj[splitted[length-1]], history: history, propName: splitted[length-1]});
-    } else if(util.isObject(prop)){
-        return Q();
-    } else {
-        return Q.reject(new TypeError('unexpected type'));
-    }
-}
 
 /**
  * Removes the given key from the translation object. Objects that become empty due to to this
@@ -115,7 +71,7 @@ function search(key, translationObject){
  * @returns {promise}
  */
 api.delKey = function(key, translationObject){
-    return search(key, translationObject)
+    return helper.search(key, translationObject)
         .then(function(result){
 
             if(util.isNullOrUndefined(result)){
@@ -142,15 +98,15 @@ api.delKey = function(key, translationObject){
 };
 
 /**
- * Returns the associated value or undefined if the given key was not found.
+ * Returns the associated value or null if the given key was not found.
  * @param {string} key
  * @param {object} translationObject
  * @returns {promise}
  */
 api.getValue = function(key, translationObject){
-    return search(key, translationObject)
+    return helper.search(key, translationObject)
         .then(function(result){
-            return Q(result? result.translation : undefined);
+            return Q(result? result.translation : null);
         });
 };
 
