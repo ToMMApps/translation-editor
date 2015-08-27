@@ -1,0 +1,30 @@
+{
+  "name": "translation-editor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test",
+    "coverage": "istanbul cover _mocha"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.tomm-apps.de:henning.gerrits/translation-editor.git"
+  },
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "istanbul": "^0.3.18",
+    "mocha": "^2.2.5",
+    "sinon": "^1.16.1"
+  },
+  "author": "Henning Gerrits",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "is-object-empty": "^1.0.0",
+    "q": "^1.4.1"
+  }
+}
