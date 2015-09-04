@@ -110,6 +110,21 @@ api.getValue = function(key, translationObject){
         });
 };
 
+
+/**
+ * Updates the value of the given key.
+ * @param {string} key
+ * @param {string} value
+ * @param {object} translationObject
+ * @returns {promise}
+ */
+api.updateValue = function(key, value, translationObject){
+    return api.delKey(key, translationObject)
+        .then(function () {
+            return api.addKey(key, value, translationObject);
+        });
+};
+
 /**
  * Returns true if the given key exists in the translation object.
  * @param {string} key

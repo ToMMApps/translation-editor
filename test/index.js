@@ -252,6 +252,21 @@ describe('api', function(){
                 done();
             });
         });
-    })
+    });
+
+    describe("updateValue", function() {
+        var translationObject = {
+            KEY: "oldValue"
+        };
+
+        it("should replace the value correctly", function (done) {
+            api.updateValue("KEY", "newValue", translationObject).then(function (result) {
+                expect(result).to.eql({
+                    KEY: "newValue"
+                });
+                done();
+            }).catch(console.error);
+        });
+    });
 
 });
