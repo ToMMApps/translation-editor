@@ -42,7 +42,7 @@ describe('api', function(){
             }).catch(console.error);
         });
 
-        it("should reject if element would be overwritten", function(done){
+        it("should reject if an existing element would be overwritten (key without dot)", function(done){
             var translationObject = {
                 KEY: "VALUE"
             };
@@ -51,6 +51,24 @@ describe('api', function(){
             }).catch(function(){
                 expect(translationObject).to.eql({
                     KEY: "VALUE"
+                });
+                done();
+            });
+        });
+
+        it("should reject if an existing element would be overwritten (key with dot)", function(done){
+            var translationObject = {
+                KEY: {
+                    OTHER_KEY: "VALUE"
+                }
+            };
+
+            api.addKey("KEY.OTHER_KEY", "otherValue", translationObject).then(function(result){
+            }).catch(function(){
+                expect(translationObject).to.eql({
+                    KEY: {
+                        OTHER_KEY: "VALUE"
+                    }
                 });
                 done();
             });
