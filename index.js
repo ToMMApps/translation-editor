@@ -5,9 +5,9 @@
  */
 
 var Q = require('q');
-var util = require('util');
 var isObjectEmpty = require('is-object-empty');
 var helper = require('./lib/helper');
+var util = require('util');
 
 var api = Object.create(null);
 
@@ -21,7 +21,7 @@ var api = Object.create(null);
  * @returns {promise} Resolves with a reference to the given translation object.
  */
 api.addKey = function(key, value, translationObject){
-    if(util.isNullOrUndefined(translationObject)){
+    if(!translationObject){
         return Q.reject(new TypeError('translationObject is not an object'));
     }
 
@@ -33,7 +33,7 @@ api.addKey = function(key, value, translationObject){
     for(var i = 0; i < length -1; i++){
         prop = obj[splitted[i]];
 
-        if(util.isNullOrUndefined(prop)){
+        if(!prop){
             obj[splitted[i]] = Object.create(null);
         } else if(util.isString(prop)){
             return Q.reject(new Error("element would be overwritten"));
@@ -48,7 +48,7 @@ api.addKey = function(key, value, translationObject){
 
     prop = obj[splitted[length-1]];
 
-    if(util.isNullOrUndefined(prop)){
+    if(!prop){
         obj[splitted[length-1]] = value;
     } else if(util.isString(prop)){
         return Q.reject(new Error("element would be overwritten"));
@@ -74,7 +74,7 @@ api.delKey = function(key, translationObject){
     return helper.search(key, translationObject)
         .then(function(result){
 
-            if(util.isNullOrUndefined(result)){
+            if(!result){
                 return Q.reject('element does not exist');
             } else {
                 var history = result.history;
@@ -134,7 +134,11 @@ api.updateValue = function(key, value, translationObject){
 api.keyExists = function(key, translationObject){
     return api.getValue(key, translationObject)
         .then(function(translation){
-            return Q(!util.isNullOrUndefined(translation));
+            if(translation){
+                return Q(true);
+            } else {
+                return Q(false);
+            }
         });
 };
 
