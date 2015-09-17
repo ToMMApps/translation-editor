@@ -7,7 +7,6 @@
 var Q = require('q');
 var isObjectEmpty = require('is-object-empty');
 var helper = require('./lib/helper');
-var util = require('util');
 
 var api = Object.create(null);
 
@@ -35,9 +34,9 @@ api.addKey = function(key, value, translationObject){
 
         if(!prop){
             obj[splitted[i]] = Object.create(null);
-        } else if(util.isString(prop)){
+        } else if(typeof prop === 'string'){
             return Q.reject(new Error("element would be overwritten"));
-        } else if(util.isObject(prop)){
+        } else if(typeof prop === 'object'){
             /* ignore */
         } else {
             return Q.reject(new TypeError('unexpected type'));
@@ -50,9 +49,9 @@ api.addKey = function(key, value, translationObject){
 
     if(!prop){
         obj[splitted[length-1]] = value;
-    } else if(util.isString(prop)){
+    } else if(typeof prop === 'string'){
         return Q.reject(new Error("element would be overwritten"));
-    } else if(util.isObject(prop)){
+    } else if(typeof prop === 'object'){
         return Q.reject(new Error("element would be overwritten"));
     } else {
         return Q.reject(new TypeError('unexpected type'));
@@ -84,7 +83,7 @@ api.delKey = function(key, translationObject){
                     var obj = history[i];
 
                     var emptyObjects = Object.keys(obj).filter(function(key){
-                        return util.isObject(obj[key]) && isObjectEmpty(obj[key]);
+                        return (typeof obj[key] === 'object') && isObjectEmpty(obj[key]);
                     });
 
                     emptyObjects.forEach(function(key){
@@ -134,7 +133,7 @@ api.updateValue = function(key, value, translationObject){
 api.keyExists = function(key, translationObject){
     return api.getValue(key, translationObject)
         .then(function(translation){
-            return Q(!util.isNullOrUndefined(translation));
+            return Q(translation? true : false);
         });
 };
 
