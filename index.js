@@ -134,11 +134,7 @@ api.updateValue = function(key, value, translationObject){
 api.keyExists = function(key, translationObject){
     return api.getValue(key, translationObject)
         .then(function(translation){
-            if(translation){
-                return Q(true);
-            } else {
-                return Q(false);
-            }
+            return Q(!util.isNullOrUndefined(translation));
         });
 };
 

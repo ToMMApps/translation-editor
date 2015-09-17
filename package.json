@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "is-object-empty": "^1.0.0",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "util": "^0.10.3"
   }
 }
