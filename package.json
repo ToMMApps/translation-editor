@@ -1,11 +1,11 @@
 {
   "name": "translation-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Allows editing of translation-objects like those that are used by angular-translate.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "coverage": "istanbul cover _mocha"
+    "cover": "istanbul cover _mocha"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "mocha": "^2.2.5"
   },
   "author": "Henning Gerrits",
-  "license": "ISC",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "is-object-empty": "^1.0.0",

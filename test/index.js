@@ -6,6 +6,13 @@ describe('api', function(){
     describe("addKey", function(){
         var translationObject = {};
 
+        it("should reject if the overhanded translation object is null", function (done) {
+            api.addKey("KEY", "VALUE", null).catch(function (err) {
+                expect(err).to.be.an('object');
+                done();
+            });
+        });
+
         it("should return a reference to the overhanded translationObject", function(done){
             api.addKey("KEY", "VALUE", translationObject).then(function(result){
                 expect(result).to.be(translationObject);

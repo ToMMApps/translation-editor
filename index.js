@@ -1,8 +1,7 @@
 /**
  * Small library to operate on translation objects like those which are part of angular-translate.
  * This library is meant to be used on both client and server-side.
- * @author Henning Gerrits
- * @type {*|exports|module.exports}
+ * @author Henning Gerrits, ToMM Apps GmbH
  */
 
 var Q = require('q');
@@ -13,12 +12,13 @@ var helper = require('./lib/helper');
 var api = Object.create(null);
 
 /**
- * Add key to the translation object. Non-existing objects will be created.
+ * Adds a key to the translation object. Non-existing objects will be created.
  * The overhanded object will be modified.
+ * If a label with the given key does already exist, this function rejects.
  * @param {string} key
  * @param {string} value
  * @param {object} translationObject
- * @returns {promise}
+ * @returns {promise} Resolves with a reference to the given translation object.
  */
 api.addKey = function(key, value, translationObject){
     if(util.isNullOrUndefined(translationObject)){
@@ -68,7 +68,7 @@ api.addKey = function(key, value, translationObject){
  * operation will be deleted, too.
  * @param {string} key
  * @param {object} translationObject
- * @returns {promise}
+ * @returns {promise} Resolves to the overhanded translation-object reference.
  */
 api.delKey = function(key, translationObject){
     return helper.search(key, translationObject)
@@ -101,7 +101,7 @@ api.delKey = function(key, translationObject){
  * Returns the associated value or null if the given key was not found.
  * @param {string} key
  * @param {object} translationObject
- * @returns {promise}
+ * @returns {promise} Resolves with the value of the given key or null if the key was not found.
  */
 api.getValue = function(key, translationObject){
     return helper.search(key, translationObject)
@@ -116,7 +116,7 @@ api.getValue = function(key, translationObject){
  * @param {string} key
  * @param {string} value
  * @param {object} translationObject
- * @returns {promise}
+ * @returns {promise} Resolves with the overhanded translation object.
  */
 api.updateValue = function(key, value, translationObject){
     return api.delKey(key, translationObject)
@@ -140,6 +140,7 @@ api.keyExists = function(key, translationObject){
 
 /**
  * Changes the key. The corresponding value will be copied.
+ * Rejcts if the new Key does already exists. If so the translation object will not be changed.
  * @param {string} oldKey
  * @param {string} newKey
  * @param {object} translationObject
