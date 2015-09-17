@@ -1,18 +1,33 @@
-#Translation-Editor
+# Translation-Editor
 
-The translation-editor package was initially written to satisfy the need to edit translation objects.
+The translation-editor package was written to satisfy the need to edit translation objects.
 Like those that are used by the angular-translate package.
+
+Installation
+------------
+
+```
+npm install translation-editor
+```
+
+Usage
+----------
 
 For example:
 
 Before the operation the translation object may look like that:
+```
 var translation = {
     "LABEL":"Example"
 };
-Now you run the updateValue operation: updateValue(LABEL, "Modified", translation).
+```
+Now you run the updateValue operation: 
+```updateValue(LABEL, "Modified", translation)```.
 After that the translation object would look like this:
+```
 console.log(translation);
 {"LABEL":"Modified"}
+```
 
 This was just an example. This package supports several operations on translation objects:
 
@@ -25,8 +40,7 @@ This was just an example. This package supports several operations on translatio
 
 The api is based on promises.
 
+Code-Quality
+---------------
+
 Run "npm run cover" for istanbul coverage report and npm test for all mocha tests.
-
-Written by Henning Gerrits, ToMM Apps GmbH
-
-MIT License
