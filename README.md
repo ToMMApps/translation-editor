@@ -43,4 +43,8 @@ The api is based on promises.
 Code-Quality
 ---------------
 
-Run "npm run cover" for istanbul coverage report and npm test for all mocha tests.
+Current Jenkins report for this project:
+- ![BuildStatus](http://jenkins.tomm-apps.de/buildStatus/icon?job=translation-editor)
+- ![Test](http://jenkins.tomm-apps.de:3434/badge/translation-editor/test)
+- ![LastBuild](http://jenkins.tomm-apps.de:3434/badge/translation-editor/lastbuild)
+- ![CodeCoverageInJenkins](http://jenkins.tomm-apps.de:3434/badge/translation-editor/coverage)
