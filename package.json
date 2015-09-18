@@ -1,6 +1,6 @@
 {
   "name": "translation-editor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Allows editing of translation-objects like those that are used by angular-translate.",
   "main": "index.js",
   "scripts": {
