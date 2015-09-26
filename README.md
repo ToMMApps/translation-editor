@@ -30,7 +30,7 @@ Now you run the updateValue operation:
 
 ```javascript
 updateValue(LABEL, "Modified", translation)
-```.
+```
 
 After that the translation object would look like this:
 
